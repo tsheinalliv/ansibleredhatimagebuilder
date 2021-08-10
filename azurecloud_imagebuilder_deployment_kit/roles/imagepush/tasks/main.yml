@@ -6,5 +6,4 @@
 - name: push the image to Azure and create an instance
   command: az storage blob upload --account-name {{ account }} --container-name {{ container }} --file {{ uuid_disk_vhd }}  --name {{ uuid_disk_vhd }} --type page
   args:
-    chdir: /home/tsheinal
-
+    chdir: <this directory is where you image is stored>
