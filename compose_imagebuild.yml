@@ -1,19 +1,19 @@
 ---
-- name: rhel for dev image 
+- name: building the image
   hosts: all  
   become: yes
   tasks: 
     - name: copy file to node 
       copy: 
         src: basicrhel_image.toml
-        dest: /home/tsheinal/
+        dest: /home/
         owner: root
         group: root
         mode: '0644'
 
     - name: build a blue print 
       command: 
-        cmd: composer-cli blueprints push /home/tsheinal/basicrhel_image.toml
+        cmd: composer-cli blueprints push /home/basicrhel_image.toml
 
     - name: start a compose 
       command: 
