@@ -12,7 +12,11 @@
 #roles: 
 #   - imagecompose 
 
-- name: push an image 
-  hosts: all
-  roles: 
-    - imagepush
+#- name: push an image 
+#  hosts: all
+#  roles: 
+#   - imagepush
+
+# You will have to unhash to use the playbook accordingly. It is important to note that the "compose an image" role \
+will not work until the image is finished building in the previous step of "build an image." It may also be "best" to separate \
+the second and third steps ("compose an image" and "push an image") into another playbook.
