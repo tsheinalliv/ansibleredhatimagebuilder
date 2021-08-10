@@ -1,0 +1,7 @@
+---
+- name: composing image to be saved 
+  command: composer-cli compose image {{ uuid }}
+  args:
+    chdir: /home/tsheinal
+  
+
