@@ -1,0 +1,26 @@
+---
+- name: copy file to node
+  copy:
+    src: files/imagebuildrheltest.toml
+    dest: /home
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: build a blue print
+  command:
+    cmd: composer-cli blueprints push /home/imagebuildrheltest.toml
+
+- name: start a compose
+  command:
+    cmd: composer-cli compose start imagebuildrheltest vhd
+
+- name: status of compose
+  command:
+    cmd: composer-cli compose status
+  register: imageuuid_output
+
+- debug:
+    var: imageuuid_output
+
+
