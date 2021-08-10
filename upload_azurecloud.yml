@@ -1,0 +1,36 @@
+---
+- name: saving image to azure cloud
+  hosts: all
+  become: yes
+  ignore_errors: yes
+  vars: 
+    user: thomas.sheinall@gmail.com
+    passsword: Tommy635!
+    account: azureforrhelimagebuilder
+    container: imagesforazure2
+    uuid: 5d94f2ff-3e99-4d63-8a78-e18e5af578ef
+    uuid_disk_vhd: "5d94f2ff-3e99-4d63-8a78-e18e5af578ef-disk.vhd"
+  tasks: 
+    - name: composing image to be saved 
+      command: composer-cli compose image {{ uuid }}
+      args:
+        chdir: /home/tsheinal
+  
+
+- name: pushing image to azure cloud 
+  hosts: all
+  vars: 
+    user: thomas.sheinall@gmail.com
+    password: Tommy635!
+    account: azureforrhelimagebuilder
+    container: imagesforazure2
+    uuid_disk_vhd: 5d94f2ff-3e99-4d63-8a78-e18e5af578ef-disk.vhd
+  tasks:
+    - name: logging into azure 
+      command:
+        cmd: az login -u {{ user }} -p {{ password }}
+          
+    - name: push the image to Azure and create an instance
+      command: az storage blob upload --account-name {{ account }} --container-name {{ container }} --file {{ uuid_disk_vhd }}  --name {{ uuid_disk_vhd }} --type page
+      args:
+         chdir: /home/tsheinal

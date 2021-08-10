@@ -1,0 +1,29 @@
+---
+- name: rhel for dev image 
+  hosts: all  
+  become: yes
+  tasks: 
+    - name: copy file to node 
+      copy: 
+        src: basicrhel_image.toml
+        dest: /home/tsheinal/
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: build a blue print 
+      command: 
+        cmd: composer-cli blueprints push /home/tsheinal/basicrhel_image.toml
+
+    - name: start a compose 
+      command: 
+        cmd: composer-cli compose start basicrhel_image vhd 
+
+    - name: status of compose 
+      command: 
+        cmd: composer-cli compose status
+      register: imageuuid_output
+
+    - debug:
+        var: imageuuid_output
+
