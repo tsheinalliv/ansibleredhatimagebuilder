@@ -2,6 +2,6 @@
 - name: composing image to be saved 
   command: composer-cli compose image {{ uuid }}
   args:
-    chdir: /home/tsheinal
+    chdir: <define where you want the image to be saved>
   
 
