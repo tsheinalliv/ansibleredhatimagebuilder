@@ -19,7 +19,7 @@
     password: <insert user password>
     account: <insert-azure-account>
     container: <insert-azure-container-account>
-    uuid_disk_vhd: <***-disk.vhd>
+    uuid_disk_vhd: <insert UUID***-disk.vhd>
   tasks:
     - name: logging into azure 
       command:
