@@ -1,0 +1,10 @@
+---
+- name: logging into azure 
+  command:
+    cmd: az login -u {{ user }} -p {{ password }}
+          
+- name: push the image to Azure and create an instance
+  command: az storage blob upload --account-name {{ account }} --container-name {{ container }} --file {{ uuid_disk_vhd }}  --name {{ uuid_disk_vhd }} --type page
+  args:
+    chdir: /home/tsheinal
+
